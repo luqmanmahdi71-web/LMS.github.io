@@ -279,11 +279,24 @@
     .stat-row{grid-template-columns:repeat(3,1fr); gap:12px;}
     .project{grid-template-columns:1fr; gap:10px;}
   }
-/* TEST CERTIFICATE SIZE */
+/* CERTIFICATIONS */
+
 .certification-grid {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 20px !important;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.certification-card {
+    text-align: center;
+    padding: 15px;
+}
+
+.certification-card img {
+    width: 150px !important;
+    height: 160px !important;
+    object-fit: contain;
+    border-radius: 8px;
 }
 </style>
 </head>
