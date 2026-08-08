@@ -349,15 +349,15 @@
     cursor: pointer;
 }
 
-/* Fullscreen popup */
+.popup-image {
+    cursor: pointer;
+}
+
 .image-popup {
     display: none;
     position: fixed;
+    inset: 0;
     z-index: 9999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
     background: rgba(0, 0, 0, 0.9);
     align-items: center;
     justify-content: center;
@@ -733,28 +733,35 @@
 const modal = document.getElementById("certModal");
 const modalImg = document.getElementById("modalImg");
 
-// Clickable certificates + lab images
 <!-- Image Popup -->
-<div id="imgModal" class="img-modal">
-    <span class="close-modal">&times;</span>
-    <img class="img-modal-content" id="popupImage">
+<div class="image-popup" id="imagePopup">
+    <span class="close">&times;</span>
+    <img id="popupImage" src="" alt="">
 </div>
 
 <script>
-const modal = document.getElementById("imgModal");
+const popupImages = document.querySelectorAll(".popup-image");
+const imagePopup = document.getElementById("imagePopup");
 const popupImage = document.getElementById("popupImage");
+const closeButton = document.querySelector(".image-popup .close");
 
-document.querySelectorAll(".popup-img").forEach(img => {
-    img.onclick = function () {
-        modal.style.display = "flex";
+popupImages.forEach(function(image) {
+    image.addEventListener("click", function() {
+        imagePopup.style.display = "flex";
         popupImage.src = this.src;
         popupImage.alt = this.alt;
-    };
+    });
 });
 
-modal.onclick = function () {
-    modal.style.display = "none";
-};
+closeButton.addEventListener("click", function() {
+    imagePopup.style.display = "none";
+});
+
+imagePopup.addEventListener("click", function(event) {
+    if (event.target === imagePopup) {
+        imagePopup.style.display = "none";
+    }
+});
 </script>
 </body>
 </html>
