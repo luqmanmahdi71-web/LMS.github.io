@@ -211,6 +211,17 @@
   .focus-card h3{font-family:var(--font-display); font-size:1.15rem; font-weight:600; margin-bottom:10px;}
   .focus-card p{color:var(--text-muted); font-size:0.94rem;}
 
+  .popup-img,
+.certification-card img {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.popup-img:hover,
+.certification-card img:hover {
+    transform: scale(1.03);
+}
+
   /* ---------- PROJECTS ---------- */
   .project{
     display:grid; grid-template-columns:120px 1fr; gap:32px;
@@ -427,11 +438,12 @@
   <div class="section-inner about-grid">
 
     <!-- Images -->
-    <div class="about-portrait">
-  <img src="Lab1.JPG" alt="Lab work 1">
-  <img src="Lab2.JPG" alt="Lab work 2">
-  <img src="Lab3.JPG" alt="Lab work 3">
-    </div>
+
+      <div class="about-portrait">
+        <img src="Lab1.JPG" alt="Lab work 1" class="popup-img">
+        <img src="Lab2.JPG" alt="Lab work 2" class="popup-img">
+        <img src="Lab3.JPG" alt="Lab work 3" class="popup-img">
+      </div>
 
     <!-- Text -->
     <div class="about-text">
@@ -683,23 +695,20 @@
     links.style.cssText += 'flex-direction:column; position:absolute; top:64px; right:20px; background:#141A24; border:1px solid #232C3A; padding:20px; border-radius:8px; gap:18px;';
   });
 </script>
-<!-- Certificate Popup -->
-<div id="certModal" class="cert-modal">
-    <span class="close-modal">&times;</span>
-    <img id="modalImg" class="cert-modal-content">
-</div>
-
 <script>
 const modal = document.getElementById("certModal");
 const modalImg = document.getElementById("modalImg");
 
-document.querySelectorAll(".certification-card img").forEach(img => {
+// Clickable certificates + lab images
+document.querySelectorAll(".certification-card img, .popup-img").forEach(img => {
     img.addEventListener("click", () => {
         modal.style.display = "flex";
         modalImg.src = img.src;
+        modalImg.alt = img.alt || "Image preview";
     });
 });
 
+// Close popup when clicking anywhere
 modal.addEventListener("click", () => {
     modal.style.display = "none";
 });
