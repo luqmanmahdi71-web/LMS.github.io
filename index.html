@@ -315,6 +315,34 @@
     }
 
 }
+  .cert-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.cert-modal-content {
+    max-width: 90%;
+    max-height: 90vh;
+    border-radius: 10px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}
+
+.certification-card img {
+    cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -551,26 +579,28 @@
 
         <h2>Certifications & Professional Development</h2>
 
-        <div class="certification-grid">
+                     <div class="certification-grid">
+          
+                          <div class="certification-card">
+                            <h3>Six Sigma Green Belt</h3>
+                            <img src="Six Sigma Green Belt-1.png" alt="Six Sigma Green Belt Certificate">
+                              </div>
+                    
+                                <div class="certification-card">
+                                      <h3>SAP Material Management</h3>
+                                      <img src="SAP MM Materials Management-1.png" alt="SAP Material Management Certificate">
+                                    </div>
+                              
+                                      <div class="certification-card">
+                                      <h3>Minitab</h3>
+                                      <img src="Learning Minitab-1.png" alt="Minitab Certificate">
+                                      </div>
+                              
+                                 <div class="certification-card">
+                                      <h3>Semiconductor Manufacturing</h3>
+                                      <img src="Semiconductor Innovation and Manufacturing-1.png" alt="Semiconductor Manufacturing Certificate">
+                      </div>
 
-            <div class="certification-card">
-                <h3>Six Sigma Green Belt</h3>
-                <img src="Six Sigma Green Belt-1.png">
-            </div>
-
-            <div class="certification-card">
-                <h3>SAP Material Management</h3>
-                <img src="SAP MM Materials Management-1.png">
-            </div>
-
-            <div class="certification-card">
-                <h3>Minitab</h3>
-                <img src="Learning Minitab-1.png">
-            </div>
-
-            <div class="certification-card">
-                <h3>Semiconductor Manufacturing</h3>
-                <img src="Semiconductor Innovation and Manufacturing-1.png">
             </div>
 
         </div>
@@ -653,6 +683,26 @@
     links.style.cssText += 'flex-direction:column; position:absolute; top:64px; right:20px; background:#141A24; border:1px solid #232C3A; padding:20px; border-radius:8px; gap:18px;';
   });
 </script>
+<!-- Certificate Popup -->
+<div id="certModal" class="cert-modal">
+    <span class="close-modal">&times;</span>
+    <img id="modalImg" class="cert-modal-content">
+</div>
 
+<script>
+const modal = document.getElementById("certModal");
+const modalImg = document.getElementById("modalImg");
+
+document.querySelectorAll(".certification-card img").forEach(img => {
+    img.addEventListener("click", () => {
+        modal.style.display = "flex";
+        modalImg.src = img.src;
+    });
+});
+
+modal.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+</script>
 </body>
 </html>
