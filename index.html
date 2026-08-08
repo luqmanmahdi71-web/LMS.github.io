@@ -238,7 +238,8 @@
   .chip:hover{border-color:var(--amber); color:var(--amber);}
 
   /* ---------- TIMELINE ---------- */
-  .timeline{position:relative; padding-left:32px;}
+
+.timeline {position: relative; padding-left: 32px;}
   .timeline::before{content:''; position:absolute; left:4px; top:6px; bottom:6px; width:1px; background:var(--border);}
   .tl-item{position:relative; padding-bottom:36px;}
   .tl-item:last-child{padding-bottom:0;}
@@ -608,7 +609,7 @@
       </div>
     </div>
   </div>
-
+</section>
   <section id="certifications">
 
     <div class="section-inner">
@@ -647,14 +648,8 @@
                     
                     </div>
 
-            </div>
-
         </div>
-
-    </div>
-
-</section>
-  
+  </div>
 </section>
   
 <section id="techniques" style="background:var(--bg-alt); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
@@ -729,39 +724,51 @@
     links.style.cssText += 'flex-direction:column; position:absolute; top:64px; right:20px; background:#141A24; border:1px solid #232C3A; padding:20px; border-radius:8px; gap:18px;';
   });
 </script>
-<script>
-const modal = document.getElementById("certModal");
-const modalImg = document.getElementById("modalImg");
+<div id="imagePopup" style="
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    z-index:99999;
+    align-items:center;
+    justify-content:center;
+">
+    <span id="closePopup" style="
+        position:absolute;
+        top:20px;
+        right:30px;
+        color:white;
+        font-size:40px;
+        cursor:pointer;
+    ">&times;</span>
 
-<!-- Image Popup -->
-<div class="image-popup" id="imagePopup">
-    <span class="close">&times;</span>
-    <img id="popupImage" src="" alt="">
+    <img id="popupImage" style="
+        max-width:95%;
+        max-height:90%;
+        object-fit:contain;
+    ">
 </div>
 
 <script>
-const popupImages = document.querySelectorAll(".popup-image");
-const imagePopup = document.getElementById("imagePopup");
-const popupImage = document.getElementById("popupImage");
-const closeButton = document.querySelector(".image-popup .close");
-
-popupImages.forEach(function(image) {
-    image.addEventListener("click", function() {
-        imagePopup.style.display = "flex";
-        popupImage.src = this.src;
-        popupImage.alt = this.alt;
-    });
+document.querySelectorAll('.popup-image').forEach(function(image) {
+    image.onclick = function() {
+        document.getElementById('popupImage').src = this.src;
+        document.getElementById('imagePopup').style.display = 'flex';
+    };
 });
 
-closeButton.addEventListener("click", function() {
-    imagePopup.style.display = "none";
-});
+document.getElementById('closePopup').onclick = function() {
+    document.getElementById('imagePopup').style.display = 'none';
+};
 
-imagePopup.addEventListener("click", function(event) {
-    if (event.target === imagePopup) {
-        imagePopup.style.display = "none";
+document.getElementById('imagePopup').onclick = function(event) {
+    if (event.target === this) {
+        this.style.display = 'none';
     }
-});
+};
 </script>
 </body>
 </html>
