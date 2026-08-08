@@ -211,17 +211,35 @@
   .focus-card h3{font-family:var(--font-display); font-size:1.15rem; font-weight:600; margin-bottom:10px;}
   .focus-card p{color:var(--text-muted); font-size:0.94rem;}
 
-  .popup-img,
-.certification-card img {
+ /* IMAGE POPUP */
+.img-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.img-modal-content {
+    max-width: 90%;
+    max-height: 90vh;
+    border-radius: 10px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
     cursor: pointer;
-    transition: transform 0.2s ease;
 }
 
-.popup-img:hover,
-.certification-card img:hover {
-    transform: scale(1.03);
+.popup-img {
+    cursor: pointer;
 }
-
   /* ---------- PROJECTS ---------- */
   .project{
     display:grid; grid-template-columns:120px 1fr; gap:32px;
@@ -700,18 +718,27 @@ const modal = document.getElementById("certModal");
 const modalImg = document.getElementById("modalImg");
 
 // Clickable certificates + lab images
-document.querySelectorAll(".certification-card img, .popup-img").forEach(img => {
-    img.addEventListener("click", () => {
+<!-- Image Popup -->
+<div id="imgModal" class="img-modal">
+    <span class="close-modal">&times;</span>
+    <img class="img-modal-content" id="popupImage">
+</div>
+
+<script>
+const modal = document.getElementById("imgModal");
+const popupImage = document.getElementById("popupImage");
+
+document.querySelectorAll(".popup-img").forEach(img => {
+    img.onclick = function () {
         modal.style.display = "flex";
-        modalImg.src = img.src;
-        modalImg.alt = img.alt || "Image preview";
-    });
+        popupImage.src = this.src;
+        popupImage.alt = this.alt;
+    };
 });
 
-// Close popup when clicking anywhere
-modal.addEventListener("click", () => {
+modal.onclick = function () {
     modal.style.display = "none";
-});
+};
 </script>
 </body>
 </html>
